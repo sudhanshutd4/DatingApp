@@ -23,6 +23,7 @@ namespace API.Controllers
 
         }
 
+        
         [HttpPost("register")]
         public async Task<ActionResult<UserDtos>> Register(RegisterDto registerDto)
         {
