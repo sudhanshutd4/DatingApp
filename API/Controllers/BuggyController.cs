@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Text.Json;
 using API.Controllers;
 using API.Data;
 using API.Entities;
@@ -36,7 +38,6 @@ namespace API.Controllers
         public ActionResult<string> GetServerError(){
             
             var thing =__context.Users.Find(-1);
-
             var thingToReturn =thing.ToString();
             return thingToReturn;
         }
