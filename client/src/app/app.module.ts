@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //added for getting data from our http request.
-import {HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHeaders, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import {FormsModule} from '@angular/forms'; 
@@ -19,6 +19,9 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery'
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     ListsComponent,
     TestErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberCardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +44,13 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule, 
-    SharedModule
-    
+    SharedModule,
+    NgxGalleryModule
   ],
   //adding interceptors
   providers: [
-    {provide : HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true} 
+    {provide : HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true} ,
+    {provide : HTTP_INTERCEPTORS,useClass: JwtInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
